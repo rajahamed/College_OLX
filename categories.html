@@ -105,8 +105,9 @@
                    <option value="Electrical Appliances">Electrical Appliances</option>
                    <option value="Furniture">Furniture </option>
                    <option value="Vehicles">Vehicles </option>
-                  
-                  
+                   <option value="Books">Books </option>
+                   <option value="Fashion">Fashion </option>
+                   <option value="Sports">Sports </option>
                  </select>
                  <br/>
                  <br/>
@@ -119,9 +120,9 @@
                     <br/>
 
 
-                    <label for="ingredients">ingredients</label>
-                    <!-- <input type="text" placeholder="ingredients" id="ingredients" required> -->
-                    <button onclick="addIngredients()">Add Ingredients</button>
+                    <label for="Specifications">Specifications</label>
+                    <!-- <input type="text" placeholder="Specifications" id="Specifications" required> -->
+                    <button onclick="addSpecifications()">Add Specifications</button>
    
                     <br/>
                     <br/>
@@ -143,19 +144,19 @@
 
     
      
-    function addIngredients(){
+    function addSpecifications(){
        
          let arr=prompt("Enter NO. of Elements")
-         let Ingredients=new Array()
+         let Specifications=new Array()
       
 
          for(let i=0;i<arr;i++){
-            Ingredients[i]=prompt("Enter Ingredients : ")
+            Specifications[i]=prompt("Enter Specification : ")
          }
           
 
 
-         let form=document.getElementById("Categorys")
+         let form=document.getElementById("Categories")
 
          form.addEventListener("submit",(e)=>{
 
@@ -168,7 +169,7 @@
                 image:form.image.value,
                 description:form.dis.value,
                 category:form.category.value,
-                ingredients:Ingredients,
+                Specifications:Specifications,
                 instructions:form.textarea.value
 
 
@@ -190,7 +191,7 @@
 
 
     async function AddCategory(obj){
-    await fetch(`https://mock-6-json-api.onrender.com/Categorys`,{
+    await fetch(`https://mock-6-json-api.onrender.com/Categories`,{
          method:"POST",
          headers:{
              'Content-type':"application/json"
