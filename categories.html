@@ -42,7 +42,7 @@
     
 }
 
-#recipe{
+#Category{
 
     width: 40%;
     margin: auto;
@@ -50,7 +50,7 @@
 
 }
 
-#recipes input{
+#Categorys input{
     width: 50%;
 }
 
@@ -61,15 +61,15 @@
     <nav id="navbar">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="recipes.html">My Recipes</a></li>
+            <li><a href="categories.html">Categories</a></li>
             <li><a href="signIn.html">SignIn </a></li>
             <li><a href="signUp.html">SignUp </a></li>
         </ul>
     </nav>
 
-    <div id="recipe">
-        <h1>Add Recipes</h1>
-             <form id="recipes">
+    <div id="Category">
+        <h1>Add Categorys</h1>
+             <form id="Category">
           
                 
 
@@ -101,9 +101,10 @@
                  <label for="category">Category</label>
                  <select  id="category">
 
-                   <option value="Starter">Starter</option>
-                   <option value="Main Course">Main Course</option>
-                   <option value="Dessert">Dessert </option>
+                   <option value="Electronics">Electronics</option>
+                   <option value="Electrical Appliances">Electrical Appliances</option>
+                   <option value="Furniture">Furniture </option>
+                   <option value="Vehicles">Vehicles </option>
                   
                   
                  </select>
@@ -154,7 +155,7 @@
           
 
 
-         let form=document.getElementById("recipes")
+         let form=document.getElementById("Categorys")
 
          form.addEventListener("submit",(e)=>{
 
@@ -174,7 +175,7 @@
             }
 
             console.log(obj)
-            AddRecipe(obj)
+            AddCategory(obj)
 
          })
         
@@ -188,8 +189,8 @@
 
 
 
-    async function AddRecipe(obj){
-    await fetch(`https://mock-6-json-api.onrender.com/recipes`,{
+    async function AddCategory(obj){
+    await fetch(`https://mock-6-json-api.onrender.com/Categorys`,{
          method:"POST",
          headers:{
              'Content-type':"application/json"

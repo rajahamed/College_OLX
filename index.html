@@ -38,7 +38,7 @@
     <nav id="navbar">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="recipes.html">My Recipes</a></li>
+            <li><a href="Categories.html">Categories</a></li>
             <li><a href="signIn.html">SignIn </a></li>
             <li><a href="signUp.html">SignUp </a></li>
         </ul>
@@ -51,7 +51,7 @@
                   id="search" 
                   onkeyup="searchdata()">
 
-                  <div id="RecipeButton"></div>
+                  <div id="Categories"></div>
 
 
 
@@ -60,9 +60,10 @@
 
                     <select  id="category">
 
-                      <option value="Starter">Starter</option>
-                      <option value="Main Course">Main Course</option>
-                      <option value="Dessert">Dessert </option>
+                      <option value="electrical appliances">Electrical Appliances</option>
+                      <option value="electronic">Electronic items</option>
+                      <option value="furniture">Furniture </option>
+                      <option value="vehicles">Vehicles </option>
                     </select>
                   
         </div>
@@ -92,7 +93,7 @@
 
     let searcDataFunc;
     function getData(page){
-        fetch(`https://mock-6-json-api.onrender.com/recipes?_page=${page}&_limit=5`)
+        fetch(`https://mock-6-json-api.onrender.com/categories?_page=${page}&_limit=5`)
         .then((res)=>res.json())
         .then((res)=>{
             console.log(res)
@@ -129,7 +130,7 @@
               category.innerText=ele.category
 
               let btn=document.createElement("button")
-              btn.innerText="View Recipe"
+              btn.innerText="View Specification"
               btn.style.color="teal"
               btn.style.fontSize="20px"
               btn.addEventListener("click",()=>{
@@ -168,7 +169,7 @@
 
 
    //.................pagination..........................
-   let paginationButton=document.getElementById("RecipeButton")
+   let paginationButton=document.getElementById("categories")
 
      function Pagination(){
       
