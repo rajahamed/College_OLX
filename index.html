@@ -1,23 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>My first web page</title>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="index.css">
     <style>
-      img {
-        width: 200px;
-        /* height: 200px; */
-        border-radius: 100px;
-        float: left;
-        margin-right: 20px;
-      }
-      .username {
-        font-weight: bold;
-      }
+        #container{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+
+            padding-top: 80px;
+        }
+
+        #container>div img{
+            width: 100%;
+            height: 250px;
+
+        }
+        #container>div{
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        #functionality{
+            margin-top: 80px;
+
+            display: flex;
+            justify-content: space-around;
+        }
     </style>
-  </head>
-  <body>
-    <img src="images/Alaya.png" alt="Digital art by Nikhil Rajput"/>
-    <p class="username">@_little_master</p>
-    <p>Hello There!</p>
-  </body>
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes.html">My Recipes</a></li>
+            <li><a href="signIn.html">SignIn </a></li>
+            <li><a href="signUp.html">SignUp </a></li>
+        </ul>
+    </nav>
+
+    <div id="functionality">
+
+                 <input type="text" 
+                  placeholder="serch here"
+                  id="search" 
+                  onkeyup="searchdata()">
+
+                  <div id="RecipeButton"></div>
+
+
+
+        <div>
+            <label for="category">Filter By Category</label>
+
+                    <select  id="category">
+
+                      <option value="Starter">Starter</option>
+                      <option value="Main Course">Main Course</option>
+                      <option value="Dessert">Dessert </option>
+                    </select>
+                  
+        </div>
+
+                    
+                  
+                 
+
+
+            
+    </div>
+
+    
+
+     <div id="container">
+
+       
+
+     </div>
+
+    
+    
+</body>
 </html>
+
+<script>
+
+    let searcDataFunc;
+    function getData(page){
+        fetch(`https://mock-6-json-api.onrender.com/recipes?_page=${page}&_limit=5`)
+        .then((res)=>res.json())
+        .then((res)=>{
+            console.log(res)
+            display(res)
+            searcDataFunc=res
+        })
+    }
+
+    getData();
+
+
+
+
+    let container=document.getElementById("container");
+
+    function display(data){
+
+        container.innerHTML=""
+
+         data.forEach((ele)=>{
+
+            let div=document.createElement("div")
+
+              let image=document.createElement("img")
+               image.src=ele.image
+
+             let title=document.createElement("h3")
+              title.innerText=ele.title
+
+              let dis=document.createElement("p")
+              dis.innerText=ele.description
+
+              let category=document.createElement("h3")
+              category.innerText=ele.category
+
+              let btn=document.createElement("button")
+              btn.innerText="View Recipe"
+              btn.style.color="teal"
+              btn.style.fontSize="20px"
+              btn.addEventListener("click",()=>{
+
+              })
+
+              div.append(image,title,dis,category,btn)
+
+              container.append(div)
+
+
+
+
+        })
+
+    }
+   
+
+    function searchdata(){
+    
+    let searcData=document.getElementById("search").value
+    
+    let data=searcDataFunc
+    if(searcData){
+   
+       data=data.filter((ele)=>ele.title.toLowerCase().includes(searcData))
+       display(data)
+    }else{
+       display(searcDataFunc)
+    }
+      
+    
+   }
+
+
+
+
+   //.................pagination..........................
+   let paginationButton=document.getElementById("RecipeButton")
+
+     function Pagination(){
+      
+       paginationButton.innerHTML=""
+   
+
+        let result= 50
+        
+        let perpage=5
+
+        let buttons=Math.ceil(result/perpage)
+
+             for(let i=1;i<=buttons;i++){
+
+              let buttonNum=document.createElement("button")
+              buttonNum.innerText=i
+              
+              buttonNum.addEventListener("click",()=>{
+                getData(i)
+                
+             })
+
+             paginationButton.append(buttonNum)
+      }
+
+
+}
+
+      Pagination()
+
+
+      let filtering=document.getElementById("category")
+
+      filtering.addEventListener("change",()=>{
+
+      
+             let filterValue=document.getElementById("category").value
+            
+               console.log(filterValue)
+
+               let data=searcDataFunc
+
+              if(filterValue){
+                data=data.filter((elem)=>elem.category==filterValue)||data
+                display(data)
+
+             }else{
+
+              display(searcDataFunc)
+
+
+            }
+
+
+        
+
+      })
+
+
+
+
+
+
+</script>
