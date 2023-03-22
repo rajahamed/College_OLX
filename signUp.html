@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#navbar{
+    width: 100%;
+    background-color:black;
+    position: fixed;
+    top: 0;
+    padding: 10px;
+
+   
+   
+}
+#navbar>ul{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+   
+}
+#navbar>ul li{
+    list-style: none;
+    font-size: 20px;
+}
+#navbar>ul li a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+#navbar>ul li a:hover{
+    color: red;
+    
+}
+
+#RegistrationForm{
+     
+    width: 30%;
+    margin: auto;
+    margin-top: 80px;
+}
+
+#RegistrationForm input{
+    width: 70%;
+    padding-top: 10px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes.html">My Recipes</a></li>
+            <li><a href="singIn.html">SignIn </a></li>
+            <li><a href="signUp.html">SignUp </a></li>
+        </ul>
+    </nav>
+
+
+
+    <div id="RegistrationForm">
+        <h1>User Registration</h1>
+
+            <form action="" id="Registration">
+                <input type="text"  id="name" required  placeholder="name" > <br/>
+                
+                <input type="text"  id="email" required  placeholder="email"> <br/>
+                
+                <input type="text"  id="password" required  placeholder="password"><br/>
+                <input type="submit" value="submit"> <br/>
+        </form>
+        <br/>
+        <br/>
+    </div>
+    
+</body>
+</html>
+
+<script>
+
+let form =document.getElementById("Registration")
+
+        form.addEventListener("submit",(e)=>{
+
+              e.preventDefault()
+
+                    let obj={
+                        name:form.name.value,
+                        email:form.email.value,
+                        password:form.password.value
+                    }
+
+
+                UserRegistration(obj)
+
+
+               form.reset()
+
+
+        })
+    
+    async function UserRegistration(obj){
+    await fetch(`https://mock-6-json-api.onrender.com/users`,{
+         method:"POST",
+         headers:{
+             'Content-type':"application/json"
+ 
+         },
+         body:JSON.stringify(obj)
+ 
+     })
+     .then((res)=>res.json())
+     .then((res)=>{
+         alert("User Is  Registered Succesfully")
+         console.log(res)
+         window.location.href="signIn.html"
+        
+     })
+ 
+    
+ }
+</script>

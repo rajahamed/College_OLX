@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#navbar{
+    width: 100%;
+    background-color:black;
+    position: fixed;
+    top: 0;
+    padding: 10px;
+
+   
+   
+}
+#navbar>ul{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+   
+}
+#navbar>ul li{
+    list-style: none;
+    font-size: 20px;
+}
+#navbar>ul li a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+#navbar>ul li a:hover{
+    color: red;
+    
+}
+
+#recipe{
+
+    width: 40%;
+    margin: auto;
+    margin-top: 80px;
+
+}
+
+#recipes input{
+    width: 50%;
+}
+
+
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes.html">My Recipes</a></li>
+            <li><a href="signIn.html">SignIn </a></li>
+            <li><a href="signUp.html">SignUp </a></li>
+        </ul>
+    </nav>
+
+    <div id="recipe">
+        <h1>Add Recipes</h1>
+             <form id="recipes">
+          
+                
+
+                   
+                    <label for="title">title </label>
+                    <input type="text" placeholder="title" id="title" required> 
+
+                    <br/>
+                    <br/>
+
+                 <label for="image">image </label>
+                  <input type="url" placeholder="image" id="image" required>
+
+                 <br/>
+                 <br/>
+
+
+                 <label for="description">description</label>
+                 <input type="text" placeholder="Description" id="dis" required>
+
+                 <br/>
+                 <br/>
+
+                
+                 
+                 
+               
+                
+                 <label for="category">Category</label>
+                 <select  id="category">
+
+                   <option value="Starter">Starter</option>
+                   <option value="Main Course">Main Course</option>
+                   <option value="Dessert">Dessert </option>
+                  
+                  
+                 </select>
+                 <br/>
+                 <br/>
+
+             
+
+                       <label for="textarea">Instructions</label>
+                     <textarea  placeholder="instructions" id="textarea"></textarea>
+                    <br/>
+                    <br/>
+
+
+                    <label for="ingredients">ingredients</label>
+                    <!-- <input type="text" placeholder="ingredients" id="ingredients" required> -->
+                    <button onclick="addIngredients()">Add Ingredients</button>
+   
+                    <br/>
+                    <br/>
+
+                
+                 <input type="submit" value="submit" id="submit">
+             
+
+              </form>
+       </div>
+
+
+
+    
+</body>
+</html>
+
+<script>
+
+    
+     
+    function addIngredients(){
+       
+         let arr=prompt("Enter NO. of Elements")
+         let Ingredients=new Array()
+      
+
+         for(let i=0;i<arr;i++){
+            Ingredients[i]=prompt("Enter Ingredients : ")
+         }
+          
+
+
+         let form=document.getElementById("recipes")
+
+         form.addEventListener("submit",(e)=>{
+
+            e.preventDefault()
+
+            let obj={
+
+                username:localStorage.getItem("name"),
+                title:form.title.value,
+                image:form.image.value,
+                description:form.dis.value,
+                category:form.category.value,
+                ingredients:Ingredients,
+                instructions:form.textarea.value
+
+
+            }
+
+            console.log(obj)
+            AddRecipe(obj)
+
+         })
+        
+
+         
+        
+
+
+
+    }
+
+
+
+    async function AddRecipe(obj){
+    await fetch(`https://mock-6-json-api.onrender.com/recipes`,{
+         method:"POST",
+         headers:{
+             'Content-type':"application/json"
+ 
+         },
+         body:JSON.stringify(obj)
+ 
+     })
+     .then((res)=>res.json())
+     .then((res)=>{
+         alert("Item Is  Registered Succesfully")
+         console.log(res)
+        
+        
+     })
+ 
+    
+ }
+
+   
+
+
+
+
+
+
+</script>
