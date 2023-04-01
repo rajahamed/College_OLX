@@ -42,7 +42,7 @@
     
 }
 
-#recipe{
+#Category{
 
     width: 40%;
     margin: auto;
@@ -50,7 +50,7 @@
 
 }
 
-#recipes input{
+#Categorys input{
     width: 50%;
 }
 
@@ -61,33 +61,33 @@
     <nav id="navbar">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="recipes.html">My Recipes</a></li>
+            <li><a href="categories.html">Categories</a></li>
             <li><a href="signIn.html">SignIn </a></li>
             <li><a href="signUp.html">SignUp </a></li>
         </ul>
     </nav>
 
-    <div id="recipe">
-        <h1>Add Recipes</h1>
-             <form id="recipes">
+    <div id="Category">
+        <h1>Add Category</h1>
+             <form id="Category">
           
                 
 
                    
-                    <label for="title">title </label>
+                    <label for="title">Title </label>
                     <input type="text" placeholder="title" id="title" required> 
 
                     <br/>
                     <br/>
 
-                 <label for="image">image </label>
+                 <label for="image">Image </label>
                   <input type="url" placeholder="image" id="image" required>
 
                  <br/>
                  <br/>
 
 
-                 <label for="description">description</label>
+                 <label for="description">Description</label>
                  <input type="text" placeholder="Description" id="dis" required>
 
                  <br/>
@@ -101,26 +101,28 @@
                  <label for="category">Category</label>
                  <select  id="category">
 
-                   <option value="Starter">Starter</option>
-                   <option value="Main Course">Main Course</option>
-                   <option value="Dessert">Dessert </option>
-                  
-                  
+                   <option value="Electronics">Electronics</option>
+                   <option value="Electrical Appliances">Electrical Appliances</option>
+                   <option value="Furniture">Furniture </option>
+                   <option value="Vehicles">Vehicles </option>
+                   <option value="Books">Books </option>
+                   <option value="Fashion">Fashion </option>
+                   <option value="Sports">Sports </option>
                  </select>
                  <br/>
                  <br/>
 
              
 
-                       <label for="textarea">Instructions</label>
-                     <textarea  placeholder="instructions" id="textarea"></textarea>
+                       <label for="textarea">Details</label>
+                     <textarea  placeholder="Details" id="textarea"></textarea>
                     <br/>
                     <br/>
 
 
-                    <label for="ingredients">ingredients</label>
-                    <!-- <input type="text" placeholder="ingredients" id="ingredients" required> -->
-                    <button onclick="addIngredients()">Add Ingredients</button>
+                    <label for="Specifications">Specifications</label>
+                    <!-- <input type="text" placeholder="Specifications" id="Specifications" required> -->
+                    <button onclick="addSpecifications()">Add Specifications</button>
    
                     <br/>
                     <br/>
@@ -142,19 +144,19 @@
 
     
      
-    function addIngredients(){
+    function addSpecifications(){
        
          let arr=prompt("Enter NO. of Elements")
-         let Ingredients=new Array()
+         let Specifications=new Array()
       
 
          for(let i=0;i<arr;i++){
-            Ingredients[i]=prompt("Enter Ingredients : ")
+            Specifications[i]=prompt("Enter Specification : ")
          }
           
 
 
-         let form=document.getElementById("recipes")
+         let form=document.getElementById("Categories")
 
          form.addEventListener("submit",(e)=>{
 
@@ -167,14 +169,14 @@
                 image:form.image.value,
                 description:form.dis.value,
                 category:form.category.value,
-                ingredients:Ingredients,
-                instructions:form.textarea.value
+                Specifications:Specifications,
+                Details:form.textarea.value
 
 
             }
 
             console.log(obj)
-            AddRecipe(obj)
+            AddCategory(obj)
 
          })
         
@@ -188,8 +190,8 @@
 
 
 
-    async function AddRecipe(obj){
-    await fetch(`https://mock-6-json-api.onrender.com/recipes`,{
+    async function AddCategory(obj){
+    await fetch(`https://mock-6-json-api.onrender.com/Categories`,{
          method:"POST",
          headers:{
              'Content-type':"application/json"
